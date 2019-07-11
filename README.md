@@ -45,7 +45,7 @@ The configurator is a streams application that monitors the _confluent-monitorin
 
 ### Setup ###
 
-All demos are run with cp-demo. The streams-configurator jar should be deployed to a place accessible by the cp-demo containers (the easiest way to do the is to put it in scripts/secrets which maps to /etc/kafka/secrets).
+All demos are run with cp-demo. The streams-configurator jar should be deployed to a place accessible by the cp-demo containers (the easiest way to do the is to put it in scripts/security which maps to /etc/kafka/secrets).
 
 ### Replicator Demo ###
 
