@@ -62,18 +62,7 @@ to:
 
 ### Replicator Demo ###
 
-#### Setup ###
-
-```
-#bring up connect
-docker-compose up connect
-
-#delete elastic search connector
-curl -X DELETE localhost:8083/connectors/elasticsearch-ksql
-```
-
 #### Launch Configurator #####
-
 
 From the kafka1 container (access this with: docker-compose exec kafka1 bash)
 
