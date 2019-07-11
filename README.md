@@ -47,6 +47,19 @@ The configurator is a streams application that monitors the _confluent-monitorin
 
 All demos are run with cp-demo. The streams-configurator jar should be deployed to a place accessible by the cp-demo containers (the easiest way to do the is to put it in scripts/security which maps to /etc/kafka/secrets).
 
+You will also need to forward a port for the configurator web service. In docker-compose.yml, under the "kafka1:" section changes the ports configuration:
+
+    ports:
+      - "9091:9091"
+      - "29091:29091"
+
+to:
+
+    ports:
+      - "9091:9091"
+      - "29091:29091"
+      - "9023:9023"
+
 ### Replicator Demo ###
 
 #### Setup ###
@@ -61,13 +74,16 @@ curl -X DELETE localhost:8083/connectors/elasticsearch-ksql
 
 #### Launch Configurator #####
 
+
+From the kafka1 container (access this with: docker-compose exec kafka1 bash)
+
 ```
 #start configurator
 cd /etc/kafka/secrets
-java -cp streams-configurator-1.0-SNAPSHOT.jar com.threefi.configurator.management.MgmtServer localhost:10091 _confluent-monitoring
+java -cp streams-configurator-1.0-SNAPSHOT.jar com.threefi.configurator.management.MgmtServer localhost:10091 _confluent-monitoring 9023
 ```
 
-This will then spend 2 mins searching for unique clients. When this is done a simple management server is launched at localhost:9022:
+This will then spend 2 mins searching for unique clients. When this is done a simple management server is launched at localhost:9023
 
 ![alt text](img/monitor_maker.png "Monitor maker")
 
@@ -109,10 +125,10 @@ kafka-console-producer --broker-list localhost:10091 --topic inputTopic
 ```
 #start configurator
 cd /etc/kafka/secrets
-java -cp streams-configurator-1.0-SNAPSHOT.jar com.threefi.configurator.management.MgmtServer localhost:10091 _confluent-monitoring
+java -cp streams-configurator-1.0-SNAPSHOT.jar com.threefi.configurator.management.MgmtServer localhost:10091 _confluent-monitoring 9023
 ```
 
-This will then spend 2 mins searching for unique clients. When this is done a simple management server is launched at localhost:9022:
+This will then spend 2 mins searching for unique clients. When this is done a simple management server is launched at localhost:9023:
 
 ![alt text](img/monitor_maker.png "Monitor maker")
 

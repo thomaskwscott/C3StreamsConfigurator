@@ -20,7 +20,7 @@ public class MgmtServer {
     }
 
     public static void main(String[] args) throws Exception {
-        Server server = new Server(9022);
+        Server server = new Server(Integer.valueOf(args[2]) );
 
         ServletHandler handler = new ServletHandler();
         server.setHandler(handler);
